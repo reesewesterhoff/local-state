@@ -16,23 +16,47 @@ class App extends Component {
   // }
 
   state = {
-    user: 'Luke',
+    user: {
+      name: '',
+      city: '',
+    }
+  }
+
+  handleCityChange = (event) => {
+    let city = event.target.value;
+    this.setState({
+      user: {
+        ...this.state.user,
+        city: city,
+      }
+    });
   }
 
   handleChange = (event) => {
-    console.log(event.target.value);
-    this.setState({user: event.target.value});  // don't reassign state, use setState
+    let name = event.target.value;
+    this.setState({
+      user: {
+        ...this.state.user,
+        name: name,
+      }
+    });  // don't reassign state, use setState
+  }
+
+  handleLogCity = (event) => {
+    console.log(this.state.user);
   }
 
   render() {
     return (
       <div className="App">
         {/* <Header /> */}
-        { JSON.stringify(this.state) }
+        {JSON.stringify(this.state)}
         <br />
-        {this.state.user}
+        {this.state.user.name}<span> is from </span>{this.state.user.city}
         <br />
-        <input value={this.state.user} onChange={this.handleChange} />
+        <input value={this.state.user.name} onChange={this.handleChange} type="text" placeholder="Name" />
+        <input value={this.state.user.city} onChange={this.handleCityChange} type="text" placeholder="City" />
+        <button onClick={this.handleLogCity}>Click Here</button>
       </div>
     );
   }
