@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from '../Header/Header'
+
 
 class App extends Component {
   // OLD WAY
@@ -19,7 +19,21 @@ class App extends Component {
     user: {
       name: '',
       city: '',
+      zipCode: '',
+      street: '',
     }
+  }
+
+ 
+
+  handleNameChange = (event) => {
+    let name = event.target.value;
+    this.setState({
+      user: {
+        ...this.state.user,
+        name: name,
+      }
+    });  // don't reassign state, use setState
   }
 
   handleCityChange = (event) => {
@@ -31,17 +45,26 @@ class App extends Component {
       }
     });
   }
-
-  handleChange = (event) => {
-    let name = event.target.value;
+  
+  handleZipChange = (event) => {
+    let zipCode = event.target.value;
     this.setState({
       user: {
         ...this.state.user,
-        name: name,
+        zipCode: zipCode,
       }
-    });  // don't reassign state, use setState
+    });
   }
 
+  handleStreetChange = (event) => {
+    let street = event.target.value;
+    this.setState({
+      user: {
+        ...this.state.user,
+        street: street,
+      }
+    });
+  }
   handleLogCity = (event) => {
     console.log(this.state.user);
   }
@@ -54,8 +77,10 @@ class App extends Component {
         <br />
         {this.state.user.name}<span> is from </span>{this.state.user.city}
         <br />
-        <input value={this.state.user.name} onChange={this.handleChange} type="text" placeholder="Name" />
+        <input value={this.state.user.name} onChange={this.handleNameChange} type="text" placeholder="Name" />
         <input value={this.state.user.city} onChange={this.handleCityChange} type="text" placeholder="City" />
+        <input value={this.state.user.zipCode} onChange={this.handleZipChange} type="text" placeholder="Zip Code" />
+        <input value={this.state.user.street} onChange={this.handleStreetChange} type="text" placeholder="Street" />
         <button onClick={this.handleLogCity}>Click Here</button>
       </div>
     );
